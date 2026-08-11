@@ -29,7 +29,18 @@ module.exports = {
       },
       {
         test: /\.s[ac]ss$/i,
-        use: ["style-loader", "css-loader", "sass-loader"],
+        use: [
+          "style-loader",
+          "css-loader",
+          {
+            loader: "sass-loader",
+            options: {
+              sassOptions: {
+                silenceDeprecations: ["import"],
+              },
+            },
+          },
+        ],
       },
       {
         test: /\.(png|jpe?g|gif|webp|svg)$/i,
