@@ -2,6 +2,7 @@ import { CSSProperties, useEffect, useState } from "react";
 import { ReactSVG } from "react-svg";
 
 import CommonModal from "../../../components/common/CommonModal";
+import ComparePopup from "./components/ComparePopup";
 import "../../../styles/utility/index.scss";
 import "../../../styles/pages/fund/tdf/index.scss";
 
@@ -172,12 +173,6 @@ const faqs = [
   { question: "내 은퇴 연도에 맞는 '삼성TDF' 상품 라인업은 어떻게 선택하나요?", answer: "예상 은퇴 연도와 가장 가까운 숫자의 TDF 빈티지를 선택하는 방식으로 살펴볼 수 있습니다." },
   { question: "TDF 투자에서 가장 중요한 '글라이드 패스(Glide Path)'의 역할은 무엇인가요?", answer: "은퇴 시점이 가까워질수록 위험자산 비중을 낮춰 장기 투자 위험을 관리하도록 돕습니다." },
   { question: "왜 많은 투자자들이 연금 자산으로 삼성 TDF를 선택하고 신뢰하나요?", answer: "오랜 운용 경험과 글로벌 분산투자, 체계적인 리서치 기반의 자산배분 역량을 결합했기 때문입니다." },
-];
-
-const comparisonRows = [
-  ["삼성 글로벌 액티브 TDF", "2016년 4월", "#글로벌 · #액티브펀드", "리서치 기반 Active 운용", "Active Fund + ETF", "당사 Glide Path (글로벌)", "글로벌·국내 주식 / 글로벌·국내 채권", "H / UH", "TDF H 10종 · UH 3종"],
-  ["삼성 글로벌 EMP TDF", "2020년 3월", "#글로벌 · #EMP펀드", "퀀트모델 기반 정량적 운용", "ETF", "당사 Glide Path (글로벌)", "글로벌·국내 주식·대체자산 / 글로벌·국내 채권", "부분H", "TDF 8종"],
-  ["삼성 코리아 EMP TDF", "2026년 5월", "#국내집중 · #EMP펀드", "한국형 자산배분", "국내 ETF", "당사 Glide Path (한국형)", "국내 주식 / 국내 채권", "UH", "TDF 10종"],
 ];
 
 const fundCards = Array.from({ length: 4 }, (_, index) => ({
@@ -583,10 +578,7 @@ export default function TdfPage() {
           : <>펀드별 수익률 및 투자성과를<br />확인해 보세요.</>}
       >
         {modal === "compare" ? (
-          <div className="compare-table">
-            <div className="compare-table__head">{["시리즈", "최초 출시", "특징", "운용 전략", "주요 투자대상", "Glide Path", "투자 자산", "환헤지", "라인업"].map((item) => <b key={item}>{item}</b>)}</div>
-            {comparisonRows.map((row, index) => <div className={`compare-table__row row-${index + 1}`} key={row[0]}>{row.map((cell) => <span key={cell}>{cell}</span>)}</div>)}
-          </div>
+          <ComparePopup />
         ) : (
           <div className="fund-list">
             {fundCards.map((fund) => (
